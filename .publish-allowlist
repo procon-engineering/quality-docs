@@ -1,0 +1,32 @@
+# Public publishing allowlist for procon-engineering/quality-docs
+# Allowlist approach: files NOT listed here must NOT be published.
+# New docs default to PRIVATE unless explicitly added here.
+#
+# Reviewed by: Aegis (Security), approved by: Magnus
+# Last updated: 2026-03-16
+
+# Quality Instructions
+quality-instructions/engineering-charter.md
+quality-instructions/findings-table-standard-2026-03-12.md
+quality-instructions/iso-standards.md
+quality-instructions/lead-engineer-qms-reporting.md
+quality-instructions/lead-engineer-scope.md
+
+# Disciplines
+disciplines/doc-control/document-control.md
+disciplines/electrical/cable-standards.md
+disciplines/electrical/free-issue-systems.md
+disciplines/electrical/suppliers-navigation-aviation.md
+disciplines/engineering/offshore-wind-foundation-lv-package-patterns.md
+disciplines/engineering/offshore-wind-foundation-scope.md
+
+# What We Do
+what-we-do/job-description-electrical-engineer-draft-2026-03-12.md
+what-we-do/job-description-engineering-director-draft-2026-03-12.md
+what-we-do/job-description-lead-engineer-draft-2026-03-12.md
+what-we-do/job-description-mechanical-engineer-draft-2026-03-12.md
+what-we-do/procon-lv-package-plain-language.md
+
+# Security Management (Aegis-approved subset only)
+security-management/isms-scope.md
+security-management/isms-policy.md
