@@ -3,7 +3,7 @@
 **Document ID:** ISMS-001 | **Version:** 0.1 (DRAFT)
 **Standard:** ISO 27001:2022, Clause 4.3
 **Owner:** Aegis (Security Manager)
-**Approved by:** _Pending Magnus approval_
+**Approved by:** Magnus Kjepso Halvorsen (2026-03-16, verbal via Discord #aegis)
 **Date:** 2026-03-16
 **Classification:** Internal
 
@@ -140,6 +140,7 @@ This ISMS is designed to conform to **ISO/IEC 27001:2022**, including the restru
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-03-16 | Aegis | Initial draft |
+| 1.0 | 2026-03-16 | Aegis | Approved by Magnus — baseline for Phase 2 |
 
 **Review cycle:** Annually, or when significant changes occur to scope, systems, or organisation.
 **Next review:** 2027-03-16
