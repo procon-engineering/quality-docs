@@ -141,10 +141,27 @@ This ISMS is designed to conform to **ISO/IEC 27001:2022**, including the restru
 |---------|------|--------|---------|
 | 0.1 | 2026-03-16 | Aegis | Initial draft |
 | 1.0 | 2026-03-16 | Aegis | Approved by Magnus — baseline for Phase 2 |
+| 1.1 | 2026-03-18 | Aegis | Added NIS2 Article 20 governance approval statement (GOV-3). Updated regulatory context to include NIS2. Noted device management scoping decision (A.8.1). |
 
 **Review cycle:** Annually, or when significant changes occur to scope, systems, or organisation.
 **Next review:** 2027-03-16
 
 ---
 
-_This document requires approval from Magnus (Engineering Director) before Phase 2 of the ISMS implementation proceeds._
+## 7. Management Governance Approval (NIS2 Article 20)
+
+In accordance with NIS2 Directive Article 20(1), the management body acknowledges and approves the cybersecurity risk-management measures described in this ISMS and its supporting documents (ISMS-001 through ISMS-011).
+
+The management body:
+1. Has reviewed the ISMS scope, risk assessment, and treatment plan
+2. Approves the cybersecurity risk-management measures as proportionate and appropriate
+3. Commits to overseeing the effective implementation of these measures
+4. Acknowledges personal accountability for ensuring compliance
+5. Has completed (or commits to completing by 2026-04-15) cybersecurity awareness training as required by Article 20(2)
+
+| Name | Role | Approval | Date |
+|------|------|----------|------|
+| Magnus Kjepso Halvorsen | Engineering Director | Verbal approval (Discord #aegis) | 2026-03-16 |
+| | | Formal sign-off | Pending |
+
+_This statement satisfies ISO 27001:2022 Clause 5.1 (Leadership and commitment) and NIS2 Article 20(1) (Governance). A formal written sign-off should be recorded when convenient — verbal approval via recorded Discord channel is accepted as interim evidence._
