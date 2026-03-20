@@ -1,10 +1,10 @@
 # Information Security Policy — Procon Engineering Department
 
-**Document ID:** ISMS-002 | **Version:** 0.1 (DRAFT)
+**Document ID:** ISMS-002 | **Version:** 1.0
 **Standard:** ISO 27001:2022, Clause 5.2
 **Owner:** Aegis (Security Manager)
 **Approved by:** _Pending Magnus approval_
-**Date:** 2026-03-16
+**Date:** 2026-03-19
 **Classification:** Internal
 
 ---
@@ -30,22 +30,36 @@ The ISMS shall achieve the following objectives:
 
 ---
 
-## 3. Principles
+## 3. Foundational Architecture
 
-### 3.1 Least Privilege
-Every agent, user, and system is granted only the minimum access required for their function. Privilege escalation requires security review.
+The agent system operates on a **two-layer security architecture** (ISMS-017):
 
-### 3.2 Defence in Depth
-No single control is relied upon. Security is layered across organisational, technical, and procedural controls.
+- **Operational Layer** — day-to-day engineering management. **No direct external interfaces.** All information enters through human employees via Monday.com or restricted internal email. Agents in this layer handle in-house data only.
+- **Development Layer** — system improvement and external content handling. Restricted to super users (currently Magnus only). External content passes through Pip (sandboxed) → Aegis (audit) → Magnus (approval) → Forge (deployment).
 
-### 3.3 Assume Breach
-External content is treated as potentially hostile. High-privilege systems are isolated from untrusted inputs. The external content handling process (Pip → Aegis → verdict) embodies this principle.
+This separation is the foundational security control. Most operational risks reduce to insider threats (compromised internal accounts), not external attackers reaching agents directly. The development layer is the only surface exposed to external risk, and it operates under heightened controls.
 
-### 3.4 Transparency
+---
+
+## 4. Principles
+
+### 4.1 Operational Isolation
+The operational layer has no direct interface with the external world. All exchanges with customers, suppliers, and the internet are mediated by human employees. This is by design and must be preserved.
+
+### 4.2 Least Privilege
+Every agent, user, and system is granted only the minimum access required for their function. Operational agents do not have exec capabilities for arbitrary code. Privilege escalation requires security review.
+
+### 4.3 Defence in Depth
+No single control is relied upon. Security is layered across organisational, technical, and procedural controls. The human boundary, agent sandboxing, plugin allowlists, exec restrictions, and daily audits form overlapping defensive layers.
+
+### 4.4 Assume Breach
+External content is treated as potentially hostile. High-privilege systems are isolated from untrusted inputs. The external content handling process (Pip → Aegis → verdict) embodies this principle. Raw external content never reaches operational agents.
+
+### 4.5 Transparency
 Security decisions are documented, reasoned, and auditable. Findings are tracked through the NCR register with full traceability.
 
-### 3.5 Proportionality
-Controls are proportionate to the risk. We invest security effort where the impact of compromise is highest.
+### 4.6 Proportionality
+Controls are proportionate to the risk. Heightened controls apply to the development layer (external exposure); lighter controls suffice for operational agents working with in-house data only.
 
 ---
 
@@ -63,26 +77,37 @@ Controls are proportionate to the risk. We invest security effort where the impa
 
 ## 5. Key Policy Directives
 
-### 5.1 External Content Handling
-All external content must pass through the approved Pip → Aegis → verdict pipeline before reaching high-privilege agents. See `security-management/isms-external-content-procedure.md` (to be created).
+### 5.1 Operational Isolation (ISMS-017)
+The operational layer must remain isolated from direct external input. Specifically:
+- Dwight's email inbox is restricted to internal Procon/Hyndla senders only (enforced via Google Admin)
+- Operational agents do not fetch content from the internet
+- Monday.com integration is scoped to the internal Procon workspace only
+- Git publishing is write-only to organisation-owned repositories with reviewed content
+- Any proposed new external interface for operational agents requires Aegis security assessment and Magnus approval before implementation
 
-### 5.2 Access Control
-Agent permissions follow the trust hierarchy. Changes to agent access, credentials, or scope require Aegis review. See the information asset register for classification and access rules.
+### 5.2 External Content Handling
+All external content entering the development layer must pass through the approved Pip (sandboxed Docker) → Aegis (security audit) → verdict pipeline. Raw external content never reaches operational agents — Dwight receives verdicts only.
 
-### 5.3 Skill and Integration Approval
-No external skill, package, or integration is deployed without an Aegis security audit and Magnus approval. Verdicts are documented in the audit trail.
+### 5.3 Access Control
+Agent permissions follow the trust hierarchy and the layer model. Operational agents have restricted exec capabilities. Development-layer agents (Forge, Aegis, Pip) have elevated permissions appropriate to their role but are subject to audit. Changes to agent access, credentials, or scope require Aegis review. See ISMS-014 (Access Control Policy) and ISMS-009 (Access Review).
 
-### 5.4 Incident Management
-Security incidents and anomalies detected in daily audits are logged, classified, and tracked through the NCR register. Critical findings trigger immediate escalation to Magnus.
+### 5.4 Command Interface Security
+Discord is the primary command interface. All allowlisted Discord users must enable two-factor authentication. The user allowlist is reviewed quarterly (ISMS-009). BYOD endpoint risk is accepted with compensating controls at the identity layer (R-019). Chrome Remote Desktop access requires 2FA on the associated Google account (R-001).
 
-### 5.5 Data Protection
-Personal data is processed in accordance with GDPR. Credentials and secrets are not stored in plain text in workspace files, chat messages, or memory. Data does not leave the local system without explicit authorisation.
+### 5.5 Skill and Integration Approval
+No external skill, package, or integration is deployed without an Aegis security audit and Magnus approval. Only super users may initiate development work. Verdicts are documented in the audit trail (`workspace-aegis/memory/`).
 
-### 5.6 Backup and Recovery
-Critical data (workspace, configurations, databases) is backed up daily. Recovery procedures are tested periodically.
+### 5.6 Incident Management
+Security incidents and anomalies detected in daily audits are logged, classified, and tracked through the NCR register (ISMS-007). Critical findings trigger immediate escalation to Magnus. The NIS2 notification procedure (24h/72h/1 month) applies for incidents affecting essential entity supply chains.
 
-### 5.7 Change Management
-Changes to agent configurations, permissions, system infrastructure, or security controls are reviewed before implementation and documented.
+### 5.7 Data Protection
+Personal data is processed in accordance with GDPR. Data processing activities are documented in ISMS-016. Credentials and secrets are not stored in plain text in workspace files, chat messages, or memory. Data does not leave the local system without explicit authorisation.
+
+### 5.8 Backup and Recovery
+Critical data (workspaces, configurations, databases, Monday.com) is backed up daily (ISMS-008). Monday.com backup includes integrity monitoring (>10% item count drop triggers alert). Recovery procedures are tested periodically.
+
+### 5.9 Change Management
+Changes to agent configurations, permissions, system infrastructure, or security controls are reviewed before implementation and documented. Changes that would breach the operational/development layer boundary require explicit Aegis assessment.
 
 ---
 
@@ -98,13 +123,20 @@ This policy is reviewed annually, or when significant changes to the organisatio
 
 | Document | Reference |
 |----------|-----------|
-| ISMS Scope | `security-management/isms-scope.md` (ISMS-001) |
-| Information Asset Register | `security-management/isms-asset-register.md` (ISMS-003, to be created) |
-| Risk Assessment & Treatment Plan | `security-management/isms-risk-assessment.md` (to be created, Phase 2) |
-| External Content Handling Procedure | `security-management/isms-external-content-procedure.md` (to be created) |
-| Operational Security Policy | `security-management/isms-security-policy.md` (migrated from `SECURITY-POLICY.md`) |
-| Inter-Agent Communication Security | `quality-instructions/inter-agent-communication-security.md` |
-| Engineering Charter | `quality-instructions/engineering-charter.md` |
+| ISMS Scope | `isms-scope.md` (ISMS-001) |
+| Security Architecture | `isms-security-architecture.md` (ISMS-017) |
+| Risk Methodology | `isms-risk-methodology.md` (ISMS-004) |
+| Risk Register | `isms-risk-register.md` (ISMS-005) |
+| Asset Register | `isms-asset-register.md` (ISMS-006) |
+| Incident Response | `isms-incident-response.md` (ISMS-007) |
+| Business Continuity | `isms-business-continuity.md` (ISMS-008) |
+| Access Review | `isms-access-review.md` (ISMS-009) |
+| NIS2 Analysis | `isms-nis2-analysis.md` (ISMS-010) |
+| Security KPIs | `isms-security-kpis.md` (ISMS-012) |
+| Cryptography Policy | `isms-cryptography-policy.md` (ISMS-013) |
+| Access Control Policy | `isms-access-control-policy.md` (ISMS-014) |
+| Supplier Security Register | `isms-supplier-security-register.md` (ISMS-015) |
+| Data Processing Register | `isms-data-processing-register.md` (ISMS-016) |
 
 ---
 
@@ -113,6 +145,7 @@ This policy is reviewed annually, or when significant changes to the organisatio
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-03-16 | Aegis | Initial draft |
+| 1.0 | 2026-03-19 | Aegis | Major reframe: integrated two-layer security architecture (ISMS-017). Added operational isolation principle, command interface security, layer-aware access control. Updated all policy directives. Updated related documents to full ISMS catalogue. |
 
 **Next review:** 2027-03-16
 

@@ -130,6 +130,8 @@ Good finding descriptions are:
 | `not-a-finding` | On review, the issue is not actually an error — the document is correct. Resolution field must explain why. |
 | `closed-deviation` | Finding acknowledged but accepted as a deviation — e.g. minor revision with no checker, approved by Engineering Director. Resolution field must record who approved and on what basis. |
 
+> **Approval override:** When a document is approved with one or more open Major findings, mark affected findings as `closed-deviation` and follow the **Document Approval Override — Reviewer Response Procedure** (WI-QMS-004). See `approval-override-response.md`.
+
 ---
 
 ## Rules That Are NOT Findings

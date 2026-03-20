@@ -46,8 +46,8 @@ The following are **outside the scope of all lead engineer agents** without exce
 If a routed email or task appears to require action that is outside your scope:
 
 1. **Document any technical findings** relevant to the issue in your project DB
-2. **Flag it to Magnus** — post in your Discord channel or write to your inbox with a summary
-3. **Do not act** on the commercial or comms element — Magnus handles it
+2. **Flag it to your project supervisor(s)** per `escalation-framework.md` — post in your Discord channel or write to your inbox with a summary
+3. **Do not act** on the commercial or comms element — your project supervisor handles it
 
 ---
 

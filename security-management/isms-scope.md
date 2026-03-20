@@ -28,11 +28,17 @@ The ISMS is built on top of Procon's existing ISO 9001:2015 Quality Management S
 
 Engineering work is managed through a multi-agent AI system (OpenClaw) that handles project coordination, document control, quality management, communications, and engineering support. This system processes sensitive engineering data, client information, and internal communications.
 
+The system operates on a **two-layer security architecture** (detailed in ISMS-017):
+- **Operational Layer** — handles day-to-day engineering management with no direct external interfaces. All information is mediated by human employees before reaching agents.
+- **Development Layer** — handles system improvement (new skills, integrations, code). Restricted to super users, with mandatory security audit of all external content.
+
+This architectural separation is the foundational security control for the entire ISMS.
+
 ### 2.2 External Context
 
 - **Industry:** Offshore wind energy — subject to IEC 60204-1, IEC 61892, and client-specific security requirements
 - **Clients:** Major energy companies (e.g. RWE) with their own information security expectations
-- **Regulatory:** GDPR (EU), Danish data protection law (personal data of employees and contacts)
+- **Regulatory:** GDPR (EU/EEA), Norwegian data protection law (personal data of employees and contacts), NIS2 Directive (supply chain obligations via essential entity clients)
 - **Supply chain:** Subcontractors, vendors, and consultants with potential access to engineering data
 
 ### 2.3 Key Stakeholders (Clause 4.2)
@@ -73,13 +79,23 @@ The ISMS covers the information security of **Procon's Engineering Department op
 - **Data stores** — SQLite databases, workspace files, LCM context database, contact databases
 
 #### 3.1.3 Processes
-- External content handling and review (Pip → Aegis flow)
-- Skill and integration auditing
+
+**Operational layer processes:**
+- Project coordination and engineering management via Monday.com
+- Internal communication handling (restricted email, Discord)
+- Document control, quality management, and NCR tracking
+- Daily security audits and integrity monitoring
+
+**Development layer processes:**
+- External content handling and review (Pip → Aegis → verdict flow)
+- Skill and integration auditing (Aegis security framework)
+- New code development and deployment (Forge → Aegis review → Magnus approval)
 - Agent access control and privilege management
 - Credential and secret management
 - Backup and recovery procedures
-- Incident detection and response (daily security audits)
 - Change management for agent configurations and permissions
+
+See ISMS-017 for the full architecture description and boundary controls.
 
 #### 3.1.4 Physical Location
 - Mac mini hosting environment (Magnus's premises, LAN-connected)
@@ -93,7 +109,7 @@ The following are explicitly excluded from this ISMS scope:
 - **Subcontractor internal systems** — covered by subcontractor agreements and their own controls
 - **Physical office security** — building access, physical server rooms (Procon corporate responsibility)
 - **Non-engineering departments** — HR, finance, sales systems not managed by the Engineering Department
-- **Personal devices** — unless used to access Engineering Department systems (then access controls apply)
+- **Personal / BYOD devices** — endpoint devices used to access Discord or Chrome Remote Desktop are not managed by the ISMS. Access control relies on identity-layer controls (Discord user allowlist, Google authentication, MFA) rather than device management. This is a deliberate scoping decision: the Mac mini is stationary and single-purpose; human devices are BYOD managed at the identity/service layer. See ISMS-017 §5.2 for boundary controls and R-019 for the residual risk.
 
 ### 3.3 Scope Boundaries
 
@@ -142,6 +158,7 @@ This ISMS is designed to conform to **ISO/IEC 27001:2022**, including the restru
 | 0.1 | 2026-03-16 | Aegis | Initial draft |
 | 1.0 | 2026-03-16 | Aegis | Approved by Magnus — baseline for Phase 2 |
 | 1.1 | 2026-03-18 | Aegis | Added NIS2 Article 20 governance approval statement (GOV-3). Updated regulatory context to include NIS2. Noted device management scoping decision (A.8.1). |
+| 1.2 | 2026-03-19 | Aegis | Integrated two-layer security architecture (ISMS-017). Added operational/development layer distinction to context, processes, and scope boundaries. Updated BYOD scoping to reference R-019. Updated regulatory context (NIS2, Norway). |
 
 **Review cycle:** Annually, or when significant changes occur to scope, systems, or organisation.
 **Next review:** 2027-03-16
