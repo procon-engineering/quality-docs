@@ -6,6 +6,7 @@
 **Approved by:** Magnus Kjepso Halvorsen (2026-03-16, verbal via Discord #aegis)
 **Date:** 2026-03-16
 **Classification:** Internal
+**Analogies:** per ISMS-018
 
 ---
 
@@ -14,6 +15,8 @@
 This document defines the scope of Procon's Information Security Management System (ISMS). It establishes what information assets, processes, systems, and locations are covered by the ISMS, and what is explicitly excluded.
 
 The ISMS is built on top of Procon's existing ISO 9001:2015 Quality Management System and shares its management infrastructure (NCR register, corrective action process, document control, internal audit framework).
+
+> **In plain terms:** This ISMS protects an AI-assisted engineering platform built on a **two-layer architecture — the office and the loading dock**. The "office" (operational layer) runs daily engineering work with no direct connection to the outside world. The "loading dock" (development layer) is where new tools and external content enter under strict security inspection. This scope document defines exactly which systems, data, and processes fall within that protected boundary.
 
 ---
 

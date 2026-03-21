@@ -6,6 +6,7 @@
 **Approved by:** _Pending Magnus approval_
 **Date:** 2026-03-19
 **Classification:** Internal
+**Analogies:** per ISMS-018
 
 ---
 
@@ -14,6 +15,12 @@
 Procon's Engineering Department is committed to protecting the confidentiality, integrity, and availability of information assets under its control. This includes engineering data, client information, personal data, system configurations, and communications processed through our agent-based engineering management system.
 
 Information security is integral to delivering "Zero Harm, First-Time-Right" engineering — our quality commitment extends to the security of the data and systems that support our work.
+
+---
+
+> ### Management Summary
+>
+> Our agent system is structured like **the office and the loading dock**. The office (operational layer) is where daily engineering work happens — it's closed to the outside world, with all external communication going through human employees first. The loading dock (development layer) is where new tools, code, and external content arrive — everything is inspected by security before it enters. The primary threat we guard against is **phishing for agents**: external content designed to trick our AI agents into doing something they shouldn't. This policy sets the rules that keep the office door locked and the loading dock under surveillance.
 
 ---
 
